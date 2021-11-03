@@ -20,12 +20,22 @@
                 <p>
                     Currently going through self-learning programming route, I 
                     have an interest in scripting, back-end web development and 
-                    GUI develepment with Python. 
+                    GUI development with Python.
                 </p>
                 <p>                 
                     Proceeding through the future, I hope to progress my abilities,
                     aiming to learn a few more programming languages and possibly
                     dabble in game development.
+                </p>
+                <br />
+                <h3>The Tools I Use</h3>
+                <p>
+                    <img src="https://raw.githubusercontent.com/yurijserrano/Github-Profile-Readme-Logos/master/programming%20languages/python.svg" title="Python" class="tool-belt">
+                    <img src="https://raw.githubusercontent.com/yurijserrano/Github-Profile-Readme-Logos/master/frameworks/flask.svg" title="Flask" class="tool-belt">
+                    <img src="https://raw.githubusercontent.com/yurijserrano/Github-Profile-Readme-Logos/master/others/html.svg" title="HTML5" class="tool-belt">
+                    <img src="https://raw.githubusercontent.com/yurijserrano/Github-Profile-Readme-Logos/master/others/css.svg" title="CSS" class="tool-belt">
+                    <img src="https://raw.githubusercontent.com/yurijserrano/Github-Profile-Readme-Logos/master/frameworks/boostrap.svg" title="Bootstrap" class="tool-belt">
+                    <img src="https://raw.githubusercontent.com/yurijserrano/Github-Profile-Readme-Logos/master/others/git.svg" title="Git" class="tool-belt">
                 </p>
             </div>
         </div>
@@ -43,7 +53,7 @@
                         </a>
                     </div>
                     <div class="col-lg-6 mx-auto portfolio-text">
-                        <h3 class="">{{ project.project_name }}</h3>
+                        <h3 class="button">{{ project.project_name }}</h3>
                         <p>Made with: {{ project.made_with }}</p>
                         <p class="">{{ project.project_description|safe }}</p>
                         {% if current_user.id == 1: %}
@@ -64,12 +74,12 @@
     <div id="contact-me" class="section">
         <div class="container-fluid admin-title">
             
-            <!-- Font Awesom icons here - Github, Twitter, LinkedIn, Email. -->
+            <!-- Font Awesome icons here - Github, Twitter, LinkedIn, Email. -->
             <div class="contacts">
-                <h2>Contact Me</h2>
-                <a href="https://www.github.com/SimonMably"><i class="fab fa-github fa-5x"></i></a>
-                <a href="https://www.twitter.com/SimonMably"><i class="fab fa-twitter fa-5x"></i></a>
-                <a href="https://www.linkedin.com/in/simonmably/"><i class="fab fa-linkedin fa-5x"></i></a>
+                <h2 class="admin-title">Contact Me</h2>
+                <a href="https://www.github.com/SimonMably" target="_blank"><i class="fab fa-github fa-5x"></i></a>
+                <a href="https://www.twitter.com/SimonMably" target="_blank"><i class="fab fa-twitter fa-5x"></i></a>
+                <a href="https://www.linkedin.com/in/simonmably/" target="_blank"><i class="fab fa-linkedin fa-5x"></i></a>
             </div>
         </div>
         <a href="{{ url_for('homepage') }}#title" class="btn btn-dark">Back to the top.</a>

@@ -78,14 +78,13 @@ def load_user(user_id: int):
 @app.route("/")
 def homepage():
     """Route responsible for the sites homepage. """
-    projects = Portfolio.query.all()
-    
+    projects = Portfolio.query.order_by(Portfolio.id.desc()).all()
+
     # Used to count amount of users in admin tablr of database, to hide 'Register'
     # button after one person registers as a user/admin
     user_count = db.session.execute("select count(id) as c from admin").scalar()
-    
-    return render_template("index.html", all_projects=projects, 
-                            user_count=user_count)
+
+    return render_template("index.html", all_projects=projects, user_count=user_count)
 
 
 @app.route("/register-admin", methods=["GET", "POST"])
@@ -97,7 +96,7 @@ def register_admin():
     Link to route will be hidden / taken off from drop-down list of navbar when
     admin user has registered."""
     register_admin_form = CreateAdminForm()
-    
+
     # Stops users from registering as admin/users if 1 admin user already exists.
     user_count = db.session.execute("select count(id) as c from admin").scalar()
     if user_count == 1:
@@ -120,7 +119,7 @@ def register_admin():
         if existing_user:
             flash("That username is already the admin. Login instead.")
             return redirect(url_for("login_admin"))
-        
+
         create_admin.password = hash_and_salted_password
 
         db.session.add(create_admin)
@@ -134,7 +133,7 @@ def register_admin():
 @app.route("/login-admin", methods=["GET", "POST"])
 def login_admin():
     """Route allows the admin user to log in to site. Renders AdminLoginForm(), 
-    1 of 3 forms on the admin page. ."""
+    1 of 3 forms on the admin page."""
     login_admin_form = AdminLoginForm()
 
     if login_admin_form.validate_on_submit():
@@ -151,7 +150,7 @@ def login_admin():
             flash("You entered the wrong password. Please try again.")
             return redirect(url_for("login_admin"))
         else:
-            login_user(admin) 
+            login_user(admin)
             return redirect(url_for("homepage"))
     return render_template("admin.html", form=login_admin_form, title="Admin Login")
 
