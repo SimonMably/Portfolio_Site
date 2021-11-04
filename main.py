@@ -199,6 +199,6 @@ def delete_project(project_id: int):
 
 if __name__ == "__main__":
     # Creates portfolio database if it doesn't exist in expected directory
-    if not os.path.isfile("portfolio.db"):
-        db.create_all()
+    # if not os.path.isfile("portfolio.db"):
+    db.create_all()
     app.run(debug=True)
