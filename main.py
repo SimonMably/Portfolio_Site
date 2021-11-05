@@ -50,7 +50,8 @@ class Portfolio(db.Model):
 login_manager = LoginManager()
 login_manager.init_app(app)
 
-db.create_all()
+# db.create_all()
+
 
 @app.context_processor
 def inject_now():
