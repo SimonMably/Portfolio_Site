@@ -47,10 +47,10 @@ class Portfolio(db.Model):
         return f"{self.project_name}"
 
 
+# db.create_all()
+
 login_manager = LoginManager()
 login_manager.init_app(app)
-
-# db.create_all()
 
 
 @app.context_processor
