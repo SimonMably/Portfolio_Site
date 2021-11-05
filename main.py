@@ -46,7 +46,7 @@ class Portfolio(db.Model):
         return f"{self.project_name}"
 
 
-db.create_all()
+# db.create_all()
 
 login_manager = LoginManager()
 login_manager.init_app(app)
