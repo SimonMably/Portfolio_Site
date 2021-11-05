@@ -79,7 +79,7 @@ def load_user(user_id: int):
 @app.route("/")
 def homepage():
     """Route responsible for the sites homepage. """
-    projects = Portfolio.query.order_by(Portfolio.id.desc()).all()
+    projects = Portfolio.query.all()
 
     # Used to count amount of users in admin tablr of database, to hide 'Register'
     # button after one person registers as a user/admin
