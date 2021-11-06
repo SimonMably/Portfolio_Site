@@ -28,14 +28,11 @@ class Admin(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(100))
-    # projects = relationship("Portfolio", back_populates="project_author")
 
 
 class Portfolio(db.Model):
     __tablename__ = "portfolio"
     id = db.Column(db.Integer, primary_key=True)
-    # author_id = db.Column(db.Integer, db.ForeignKey("admin.id"))
-    # project_author = relationship("Admin", back_populates="projects")
     project_name = db.Column(db.String(100), unique=True, nullable=False)
     project_description = db.Column(db.String(500), nullable=False)
     project_url = db.Column(db.String(300), nullable=False)
@@ -78,8 +75,9 @@ def load_user(user_id: int):
 
 @app.route("/")
 def homepage():
-    """Route responsible for the sites homepage. """
-    projects = Portfolio.query.all()
+    """Route responsible for the sites homepage. Contains 'About Me', 'Portfoilio',
+    and 'Contact Me' Sections."""
+    projects = Portfolio.query.order_by(Portfolio.id.desc()).all()
 
     # Used to count amount of users in admin tablr of database, to hide 'Register'
     # button after one person registers as a user/admin
@@ -182,6 +180,7 @@ def add_project_to_database():
 
         db.session.add(new_project)
         db.session.commit()
+        
         return redirect(url_for("add_project_to_database"))
     return render_template("admin.html", form=add_project_form,
                            current_user=current_user, title="Add Project to Database")
@@ -200,7 +199,4 @@ def delete_project(project_id: int):
 
 
 if __name__ == "__main__":
-    # Creates portfolio database if it doesn't exist in expected directory
-    # if not os.path.isfile("portfolio.db"):
-    # db.create_all()
     app.run(debug=True)
