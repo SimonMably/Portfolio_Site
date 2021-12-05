@@ -63,12 +63,13 @@
                 </div>
                 <hr>
             {% endfor %}
-            {% if all_projects|length <= 3 %}
-                    <div class="row">
-                        <h2 class="admin-title">More to come...</h2>
-                    </div>
-                {% endif %}
+            
         </div>
+        {% if all_projects|length <= 3 %}
+            <div class="row">
+                <h2 class="admin-title">More to come...</h2>
+            </div>
+        {% endif %}
     </div>
 
     <div id="contact-me" class="section">
