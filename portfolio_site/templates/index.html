@@ -1,0 +1,77 @@
+{% extends "base.html" %} {% block title %} Simon Mably {% endblock %} {% block content %}
+
+<section id="intro" class="grid-col-2">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <img src="{{ url_for('static', filename='images/me.png') }}" class="image-of-me" alt="An old image of me">
+
+    <div class="">
+        <h1 class="title">I'm Simon</h1>
+        <br />
+        <p>
+            Currently going through self-learning programming route, I have an interest in scripting, back-end web development and GUI development with Python.
+        </p>
+        <p>
+            Proceeding through the future, I hope to progress my abilities, aiming to learn a few more programming languages and possibly dabble in game development.
+        </p>
+        <br />
+        <h3 class="sub-title">The Tools I Use</h3>
+
+        <div class="tool-belt">
+            <img src="https://raw.githubusercontent.com/yurijserrano/Github-Profile-Readme-Logos/master/programming%20languages/python.svg" title="Python">
+            <img src="https://raw.githubusercontent.com/yurijserrano/Github-Profile-Readme-Logos/master/frameworks/flask.svg" title="Flask">
+            <img src="https://raw.githubusercontent.com/yurijserrano/Github-Profile-Readme-Logos/master/others/html.svg" title="HTML5">
+            <img src="https://raw.githubusercontent.com/yurijserrano/Github-Profile-Readme-Logos/master/others/css.svg" title="CSS">
+            <img src="https://raw.githubusercontent.com/yurijserrano/Github-Profile-Readme-Logos/master/frameworks/boostrap.svg" title="Bootstrap">
+            <img src="https://raw.githubusercontent.com/yurijserrano/Github-Profile-Readme-Logos/master/others/git.svg" title="Git">
+        </div>
+    </div>
+</section>
+
+<section id="portfolio">
+    <h1 class="title">Portfolio</h1>
+    {% for project in all_projects: %}
+    <div class="project grid-col-2">
+        <a href="{{ project.project_url }}" target="_blank">
+            <img src="{{ url_for('static', filename=project.img_name) }}" class="project-img" alt="">
+        </a>
+        <div class="box-text">
+            <h3 class="sub-title">{{ project.project_name }}</h3>
+            <p><b>Made with: </b> {{ project.made_with }}</p>
+            <p>{{ project.project_description|safe }}</p>
+            {% if current_user.id == 1 %}
+                <button type="button">
+                    <a href="{{ url_for('delete_project', project_id=project.id) }}">
+                        Delete Project
+                    </a>
+                </button>
+            {% endif %}
+        </div>
+    </div>
+    <hr>
+    {% endfor %}
+    {% if all_projects|length <=3 %}
+    <div class="">
+        <h2 class="sub-title">More to come...</h2>
+    </div>
+    {% endif %}
+</section>
+
+<section id="contact-me" class="">
+    <p>
+        <h1 class="title">Contact Me</h1>
+        <a href="https://www.github.com/SimonMably" target="_blank"><i class="fab fa-github fa-5x"></i></a>
+        <a href="https://www.twitter.com/SimonMably" target="_blank"><i class="fab fa-twitter fa-5x"></i></a>
+        <a href="https://www.linkedin.com/in/simonmably/" target="_blank"><i class="fab fa-linkedin fa-5x"></i></a>
+    </p>
+
+    <a href="{{ url_for('homepage') }}#title" class="link">Back to the top.</a>
+</section>
+
+{% endblock %}

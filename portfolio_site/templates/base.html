@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Favicon: Sizes for all devices -->
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="{{ url_for('static', filename='images/favicon/apple-touch-icon-57x57.png') }}" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ url_for('static', filename='images/favicon/apple-touch-icon-114x114.png') }}" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ url_for('static', filename='images/favicon/apple-touch-icon-72x72.png') }}" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ url_for('static', filename='images/favicon/apple-touch-icon-144x144.png') }}" />
+    <link rel="apple-touch-icon-precomposed" sizes="60x60" href="{{ url_for('static', filename='images/favicon/apple-touch-icon-60x60.png') }}" />
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="{{ url_for('static', filename='images/favicon/apple-touch-icon-120x120.png') }}" />
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="{{ url_for('static', filename='images/favicon/apple-touch-icon-76x76.png') }}" />
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="{{ url_for('static', filename='images/favicon/apple-touch-icon-152x152.png') }}" />
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon/favicon-196x196.png') }}" sizes="196x196" />
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon/favicon/favicon-96x96.png') }}" sizes="96x96" />
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon/favicon-32x32.png') }}" sizes="32x32" />
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon/favicon-16x16.png') }}" sizes="16x16" />
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon/favicon-128.png') }}" sizes="128x128" />
+    <meta name="application-name" content="&nbsp;" />
+    <meta name="msapplication-TileColor" content="#FFFFFF" />
+    <meta name="msapplication-TileImage" content="{{ url_for('static', filename='images/favicon/mstile-144x144.png') }}" />
+    <meta name="msapplication-square70x70logo" content="{{ url_for('static', filename='images/favicon/mstile-70x70.png') }}" />
+    <meta name="msapplication-square150x150logo" content="{{ url_for('static', filename='images/favicon/mstile-150x150.png') }}" />
+    <meta name="msapplication-wide310x150logo" content="{{ url_for('static', filename='images/favicon/mstile-310x150.png') }}" />
+    <meta name="msapplication-square310x310logo" content="{{ url_for('static', filename='images/favicon/mstile-310x310.png') }}" />
+
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300&family=Open+Sans:wght@500&family=Roboto:wght@300&display=swap" rel="stylesheet">
+
+    <!-- CSS Stylesheets -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> -->
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='styles/bootstap_styles.css') }}"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
+
+    <!-- Font Awesome - Icons & Logos -->
+    <script src="https://kit.fontawesome.com/f9db6db651.js" crossorigin="anonymous"></script>
+
+
+    <title>
+        {% block title %} {% endblock %}
+    </title>
+</head>
+
+<body>
+    <nav id="title" class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-brand">
+                <a href="{{ url_for('homepage') }}">Simon Mably</a>
+            </div>
+            <ul class="navbar-nav-right">
+                <li><a href="{{ url_for('homepage') }}">Home</a></li>
+                <li><a href="{{ url_for('homepage') }}#portfolio">Portfolio</a></li>
+                <li><a href="{{ url_for('homepage') }}#contact-me">Contact Me</a></li>
+
+                {% if not current_user.is_authenticated: %}
+                <div class="dropdown">
+                    <button onclick="navAdmin()" class="drop-btn">Admin
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div id="adminDropdown" class="dropdown-content">
+                        {% if user_count == 0 %}
+                        <li><a href="{{ url_for('register_admin') }}">Register Admin</a></li>
+                        {% endif %}
+                        <li><a href="{{ url_for('login_admin') }}">Login Admin</a></li>
+                        {% else: %}
+                        <!-- FIX: below 2 links aren't apart of the dropdown menu -->
+                        <li><a href="{{ url_for('add_project_to_database') }}">Add Project</a></li>
+                        <li><a href="{{ url_for('logout_admin') }}">Logout</a></li>
+                    </div>
+                </div>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    {% block content %} {% endblock %}
+
+    <footer id="footer" class="footer">
+        <div class="copyright text-muted">
+            Copyright &copy; Simon Mably {{ now.year }}
+        </div>
+    </footer>
+
+    <!--JavaScript for Bootstrap elements-->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous">
+    </script> -->
+
+    <!-- Other JavaScript: Navbar Dropdown Menu -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>

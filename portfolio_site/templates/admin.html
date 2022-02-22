@@ -1,0 +1,80 @@
+{% import "bootstrap/wtf.html" as wtf %}
+{% extends "base.html" %}
+{% block title %}Simon Mably{% endblock %}
+{% block content %}
+
+<section class="">
+    <h1 class="title admin-title">{{ title }}</h1>
+    <div class="admin-wrapper">
+        <div class="admin-form">
+            {% if add_form %}
+                <form method="post" action="#">
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <p>{{ message }}</p>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                    {{ add_form.hidden_tag() }}
+                    <div class="fielditem">
+                        {{ add_form.project_name.label }}
+                        {{ add_form.project_name }}
+
+                        {{ add_form.body.label }}
+                        {{ add_form.body }}
+
+                        {{ add_form.project_url.label }}
+                        {{ add_form.project_url }}
+
+                        {{ add_form.img_name.label }}
+                        {{ add_form.img_name }}
+                        {{ add_form.made_with.label }}
+                        {{ add_form.made_with }}
+                    </div>
+                    {{ add_form.submit }}
+                </form>
+            {% elif register_form %}
+                <form method="post" action="#">
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <p>{{ message }}</p>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                    {{ register_form.hidden_tag() }}
+                    <div class="fielditem">
+                        {{ register_form.username.label }}
+                        {{ register_form.username }}
+
+                        {{ register_form.password.label }}
+                        {{ register_form.password }}
+                    </div>
+                    {{ register_form.submit }}
+                </form>
+            {% elif login_form %}
+                <form method="post" action="#">
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <p>{{ message }}</p>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                    {{ login_form.hidden_tag() }}
+                    <div class="fielditem">
+                        {{ login_form.username.label }}
+                        {{ login_form.username }}
+
+                        {{ login_form.password.label }}
+                        {{ login_form.password }}
+                    </div>
+                    {{ login_form.submit }}
+                </form>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}

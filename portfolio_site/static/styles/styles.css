@@ -1,0 +1,402 @@
+/* Utility classes */
+
+:root {
+    --color-navbar: #0e0e0e;
+    --color-section: #fff;
+    --color-background: #ccccff;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    font-family: "Open Sans", sans-serif;
+    list-style: 1.4;
+    font-weight: 100;
+    text-align: center;
+    background-color: var(--color-background);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Cormorant Garamond";
+    font-weight: 900;
+    text-align: left;
+}
+
+.title {
+    font-size: 40px;
+}
+
+.sub-title {
+    font-size: 30px;
+}
+
+section {
+    text-align: center;
+    width: auto;
+    padding: 50px 60px;
+    margin: 30px;
+    background-color: #fff;
+    border-radius: 50px;
+}
+
+section a {
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+p {
+    font-family: "Roboto", condensed;
+    font-weight: 400;
+    font-size: 18px;
+    padding: 0 10px 0;
+    text-align: left;
+    margin: 5px 0;
+    line-height: 1.7;
+}
+
+button {
+    background: none;
+    border: 2px #000 solid;
+    border-radius: 10px;
+    font-size: 20px;
+}
+
+button a {
+    color: #000;
+    text-decoration: none;
+    padding: 0 20px;
+}
+
+footer {
+    text-align: center;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    padding: 10px;
+    height: 50px;
+}
+
+content p {
+    font-style: italic;
+    color: red;
+}
+
+/* label {
+    margin-right: 20px;
+} */
+
+input {
+    /* margin-bottom: 10px */
+}
+
+.grid-col-2 {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 0;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* COMPLETE Navbar */
+
+.navbar {
+    width: 100%;
+    height: auto;
+    background: var(--color-navbar);
+    padding: 20px;
+    font-weight: normal;
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-brand {
+    font-size: 26px;
+    text-decoration: none;
+}
+
+.navbar-brand a {
+    letter-spacing: 3px;
+    color: #fff;
+}
+
+.navbar ul {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-nav-right li {
+    padding: 0 15px;
+}
+
+.navbar-nav-right a {
+    font-weight: 300;
+    color: #fff;
+    font-size: 22px;
+    font-weight: 300;
+}
+
+.navbar-nav-right a:hover {
+    color: #ff6;
+}
+
+.navbar-nav-right button {
+    padding: 0 15px;
+}
+
+.navbar a {
+    text-decoration: none;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--color-navbar);
+    min-width: 250px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    margin-top: 5px;
+    padding: 10px;
+    text-align: right;
+    line-height: 1.7;
+    border-radius: 5px;
+    right: 0;
+    z-index: 1;
+}
+
+.dropdown li {
+    cursor: pointer;
+    display: inline-block;
+    background: none;
+    color: #fff;
+    font-size: 22px;
+    font-weight: 300;
+    text-decoration: none;
+}
+
+.dropdown .drop-btn {
+    background-color: inherit;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 22px;
+    outline: none;
+    font-family: inherit;
+    margin: 0;
+}
+
+.dropdown .drop-btn:hover {
+    color: #ff6;
+}
+
+.show {
+    display: block;
+}
+
+/* Images & Icons */
+
+.image-of-me {
+    margin-left: 40px;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.tool-belt img {
+    height: 120px;
+    margin: 10px;
+}
+
+.fab {
+    margin: 20px 20px 50px 20px;
+    text-align: center;
+    color: #010427;
+}
+
+/* Introduction Section */
+
+
+/* Portfolio Section */
+.project {
+    margin: 10px 0;
+}
+
+.project-img {
+    height: 350px;
+    border: 3px #000 solid;
+    border-radius: 10px;
+}
+
+.box-text {
+    margin: 0 10px;
+}
+
+
+/* Form */
+
+.admin-title {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.admin-form form {
+    display: grid;
+    grid-template-columns: 1fr;
+    text-align: left;
+    max-width: 50%;
+    margin: 0 auto 25px;
+}
+
+.fielditem {
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
+    /* width: 300px; */
+}
+
+.fielditem label {
+    margin-bottom: 5px;
+}
+
+.fielditem input {
+    margin-bottom: 15px;
+    height: 30px;
+    font-size: 22px;
+}
+
+.fielditem textarea {
+    margin-bottom: 15px;
+    height: 100px;
+    font-size: 22px;
+}
+
+#submit {
+    max-width: 170px;
+    font-size: 20px;
+    margin-top: 10px;
+    padding: 3px 0;
+    border-radius: 5px;
+}
+
+/* Other */
+
+.link {
+    color: #000;
+}
+
+
+/* .section {
+    text-align: center;
+    width: auto;
+    padding: 30px;
+    margin: 3rem;
+    background-color: #fff;
+    border-radius: 50px;
+}
+
+.form-section {
+    text-align: left;
+    width: auto;
+    height: auto;
+    padding: 30px;
+    margin: 3rem;
+    background-color: #fff;
+    border-radius: 50px;
+}
+
+.image-of-me {
+    border-radius: 50%;
+}
+
+.row {
+    padding: 2rem;
+}
+
+.admin-title {
+    text-align: center;
+}
+
+.project-img {
+    width: 100%;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: #EEEEEE;
+    border-width: 5px;
+    border-spacing: 15px;
+}
+
+
+
+.tool-belt {
+    height: 75px;
+} */
+
+
+/* Mobile Responsive */
+
+
+/* @media (max-width: 500px) and (orientaion: portrait {} */
+
+
+/* to have both at the same time*/
+
+
+/* @media (max-width:500px), (orientation: portrait {} */
+
+
+/* the , acts as an or */
+
+@media (max-width: 500px) {
+    html,
+    body {}
+    section {}
+    /* Navbar */
+    /* Images & Icons */
+    .image-of-me {
+        width: 100%;
+        max-width: 100%;
+        padding-bottom: 25px;
+        display: block;
+    }
+    .section {
+        text-align: center;
+        width: auto;
+        padding: 5px;
+        margin: 10px;
+        background-color: #fff;
+    }
+    .form-section {
+        text-align: center;
+        width: auto;
+        padding: 5px;
+        margin: 10px;
+        background-color: #fff;
+    }
+    .fab {
+        padding: 15px 5px 15px 5px;
+        text-align: center;
+    }
+    .btn {
+        margin: 10px auto;
+    }
+}

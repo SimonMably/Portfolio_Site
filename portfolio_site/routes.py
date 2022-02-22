@@ -1,52 +1,15 @@
-from flask import Flask, render_template, redirect, url_for, flash, request, \
-    abort
-from flask_bootstrap import Bootstrap
-from sqlalchemy.orm import query
-from werkzeug.security import generate_password_hash, check_password_hash
-from flask_sqlalchemy import SQLAlchemy
-from flask_ckeditor import CKEditor
-from flask_login import UserMixin, login_user, LoginManager, login_required, \
-    current_user, logout_user
-from functools import wraps
 from datetime import datetime as dt
-import os
-from forms import CreateAdminForm, AdminLoginForm, AddProjectForm
+from functools import wraps
 
-app = Flask(__name__)
-Bootstrap(app)
-ckeditor = CKEditor(app)
+from flask import render_template, redirect, url_for, flash, request, \
+    abort
+from flask_login import login_user, login_required, current_user, logout_user
+from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.utils import secure_filename
 
-app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "SECRET_KEY")
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DB_URL", "sqlite:///portfolio.db")
-db = SQLAlchemy(app)
-
-
-# Database
-class Admin(UserMixin, db.Model):
-    __tablename__ = "admin"
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(100), unique=True)
-    password = db.Column(db.String(100))
-
-
-class Portfolio(db.Model):
-    __tablename__ = "portfolio"
-    id = db.Column(db.Integer, primary_key=True)
-    project_name = db.Column(db.String(100), unique=True, nullable=False)
-    project_description = db.Column(db.String(500), nullable=False)
-    project_url = db.Column(db.String(300), nullable=False)
-    img_name = db.Column(db.String(300), nullable=False)
-    made_with = db.Column(db.String(300), nullable=False)
-
-    def __repr__(self) -> str:
-        return f"{self.project_name}"
-
-
-# db.create_all()
-
-login_manager = LoginManager()
-login_manager.init_app(app)
+from portfolio_site import app, db, login_manager, IMG_UPLOAD_FOLDER, ALLOWED_IMG_EXTENSIONS
+from portfolio_site.models import Admin, Portfolio
+from portfolio_site.forms import CreateAdminForm, AdminLoginForm, AddProjectForm
 
 
 @app.context_processor
@@ -60,6 +23,7 @@ def admin_only(f):
     actions / access certain features."""
     @wraps(f)
     def func(*args, **kwargs):
+        # current_user.authenticated & current_user is fine
         if not current_user.is_authenticated or current_user.id != 1:
             return abort(403)
         return f(*args, **kwargs)
@@ -126,7 +90,7 @@ def register_admin():
 
         login_user(create_admin)
         return redirect(url_for("homepage"))
-    return render_template("admin.html", form=register_admin_form, title="Register as Admin")
+    return render_template("admin.html", regster_form=register_admin_form, title="Register as Admin")
 
 
 @app.route("/login-admin", methods=["GET", "POST"])
@@ -151,7 +115,7 @@ def login_admin():
         else:
             login_user(admin)
             return redirect(url_for("homepage"))
-    return render_template("admin.html", form=login_admin_form, title="Admin Login")
+    return render_template("admin.html", login_form=login_admin_form, title="Admin Login")
 
 
 @app.route("/logout")
@@ -167,6 +131,7 @@ def logout_admin():
 def add_project_to_database():
     """Adds new project to Portfolio table of database. Renders AddProjectForm, 
     1 of 3 forms, on to the admin page. """
+
     add_project_form = AddProjectForm()
 
     if add_project_form.validate_on_submit():
@@ -182,7 +147,7 @@ def add_project_to_database():
         db.session.commit()
         
         return redirect(url_for("add_project_to_database"))
-    return render_template("admin.html", form=add_project_form,
+    return render_template("admin.html", add_form=add_project_form,
                            current_user=current_user, title="Add Project to Database")
 
 
@@ -196,7 +161,3 @@ def delete_project(project_id: int):
     db.session.commit()
 
     return redirect(url_for("homepage"))
-
-
-if __name__ == "__main__":
-    app.run(debug=True)
