@@ -15,7 +15,6 @@ ckeditor = CKEditor(app)
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "SECRET_KEY")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DB_URL", "sqlite:///portfolio.db")
-app.config['UPLOAD_FOLDER'] = IMG_UPLOAD_FOLDER
 db = SQLAlchemy(app)
 
 
