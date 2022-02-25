@@ -7,7 +7,7 @@ from flask_login import login_user, login_required, current_user, logout_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 
-from portfolio_site import app, db, login_manager, IMG_UPLOAD_FOLDER, ALLOWED_IMG_EXTENSIONS
+from portfolio_site import app, db, login_manager
 from portfolio_site.models import Admin, Portfolio
 from portfolio_site.forms import CreateAdminForm, AdminLoginForm, AddProjectForm
 
